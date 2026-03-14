@@ -1,6 +1,22 @@
+// src/app/page.js
+// Главная страница — пока заглушка, обёрнута в AuthGuard
+
 'use client';
 
+import AuthGuard from '@/components/AuthGuard';
+import { useAuth } from '@/context/AuthContext';
+
 export default function HomePage() {
+  return (
+    <AuthGuard>
+      <HomeContent />
+    </AuthGuard>
+  );
+}
+
+function HomeContent() {
+  const { user, signOut } = useAuth();
+
   return (
     <div
       style={{
@@ -39,6 +55,49 @@ export default function HomePage() {
       <p style={{ color: 'var(--color-text-secondary)', fontSize: '15px' }}>
         Учёт клиентов зала
       </p>
+
+      {/* Информация о пользователе */}
+      <div
+        style={{
+          marginTop: '32px',
+          padding: '16px 20px',
+          borderRadius: 'var(--radius-md)',
+          backgroundColor: 'var(--color-card-bg)',
+          boxShadow: '0 2px 8px var(--color-shadow)',
+          border: '1px solid var(--color-card-border)',
+          width: '100%',
+          maxWidth: '300px',
+        }}
+      >
+        <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', margin: '0 0 4px' }}>
+          Вы вошли как
+        </p>
+        <p style={{ fontSize: '15px', fontWeight: '600', margin: '0 0 2px', color: 'var(--color-text-primary)' }}>
+          {user?.displayName || 'Пользователь'}
+        </p>
+        <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: '0' }}>
+          {user?.email}
+        </p>
+      </div>
+
+      {/* Кнопка выхода — временная, потом будет в меню */}
+      <button
+        onClick={signOut}
+        style={{
+          marginTop: '20px',
+          padding: '10px 24px',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid var(--color-status-overdue)',
+          backgroundColor: 'transparent',
+          color: 'var(--color-status-overdue)',
+          fontSize: '14px',
+          fontWeight: '500',
+          cursor: 'pointer',
+        }}
+      >
+        Выйти
+      </button>
+
       <p
         style={{
           marginTop: '40px',
@@ -46,7 +105,7 @@ export default function HomePage() {
           fontSize: '13px',
         }}
       >
-        Шаг 1 завершён — проект настроен!
+        Шаг 2 завершён — авторизация работает!
       </p>
     </div>
   );

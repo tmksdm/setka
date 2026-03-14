@@ -1,4 +1,8 @@
+// src/app/layout.js
+// Корневой layout — метаданные PWA, тема без мигания, провайдер авторизации
+
 import './globals.css';
+import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata = {
   title: 'Сетка — учёт клиентов зала',
@@ -55,7 +59,9 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

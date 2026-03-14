@@ -1,6 +1,6 @@
 {
   "name": "setka",
-  "version": "260314",
+  "version": "260314.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
