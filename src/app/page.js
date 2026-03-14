@@ -5,6 +5,8 @@
 
 import AuthGuard from '@/components/AuthGuard';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/context/ThemeContext';
+import { Moon, Sun } from 'lucide-react';
 
 export default function HomePage() {
   return (
@@ -16,6 +18,7 @@ export default function HomePage() {
 
 function HomeContent() {
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div
@@ -80,11 +83,33 @@ function HomeContent() {
         </p>
       </div>
 
+      {/* Кнопка переключения темы — временная, потом переедет в dropdown-меню */}
+      <button
+        onClick={toggleTheme}
+        style={{
+          marginTop: '20px',
+          padding: '10px 24px',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid var(--color-primary-light)',
+          backgroundColor: 'transparent',
+          color: 'var(--color-primary-light)',
+          fontSize: '14px',
+          fontWeight: '500',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
+        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        {theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+      </button>
+
       {/* Кнопка выхода — временная, потом будет в меню */}
       <button
         onClick={signOut}
         style={{
-          marginTop: '20px',
+          marginTop: '12px',
           padding: '10px 24px',
           borderRadius: 'var(--radius-md)',
           border: '1px solid var(--color-status-overdue)',
@@ -105,7 +130,7 @@ function HomeContent() {
           fontSize: '13px',
         }}
       >
-        Шаг 2 завершён — авторизация работает!
+        Шаг 3 завершён — тема работает!
       </p>
     </div>
   );
