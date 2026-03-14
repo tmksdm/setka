@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  devIndicators: false,
+
   // PWA-совместимые заголовки
   async headers() {
     return [
